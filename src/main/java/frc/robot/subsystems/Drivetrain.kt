@@ -10,14 +10,14 @@ import frc.robot.Input
 object Drivetrain : SubsystemBase() {
 
     private var slowMode = false
-    
-    val leftFollower = Jaguar(ElectronicIDs.DRIVE_LEFT_FOLLOWER_ID)
-    val rightFollower = Jaguar(ElectronicIDs.DRIVE_RIGHT_FOLLOWER_ID)
-    
-    val rightLeader = Jaguar(ElectronicIDs.DRIVE_RIGHT_FOLLOWER_ID).addFollower(rightFollower)
-    val leftLeader = Jaguar(ElectronicIDs.DRIVE_RIGHT_FOLLOWER_ID).addFollower(rightFollower)
-    
-    val drivetrain = DifferentialDrive(rightFollower, leftFollower)
+
+    val rightLeader = Jaguar(ElectronicIDs.DRIVE_RIGHT_LEADER_ID)
+    val leftLeader = Jaguar(ElectronicIDs.DRIVE_RIGHT_LEADER_ID)
+
+    val rightFollower = Jaguar(ElectronicIDs.DRIVE_RIGHT_FOLLOWER_ID).addFollower(rightLeader)
+    val leftFollower = Jaguar(ElectronicIDs.DRIVE_LEFT_FOLLOWER_ID).addFollower(leftLeader)
+
+    val drivetrain = DifferentialDrive(rightLeader, leftLeader)
     
     init {}
     
