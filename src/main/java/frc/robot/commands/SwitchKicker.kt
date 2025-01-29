@@ -12,9 +12,9 @@ class SwitchKicker : Command() {
     override fun end(isFinished: Boolean) {
 
         if (Kicker.isUp) {
-            Kicker.lowerKicker()
+            Kicker.down()
         } else {
-            Kicker.raiseKicker()
+            Kicker.up()
         }
     }
 }

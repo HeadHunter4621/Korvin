@@ -12,9 +12,9 @@ class SwitchArm: Command() {
     override fun end(isFinished: Boolean) {
 
         if (Intake.isUp) {
-            Intake.lowerArm()
+            Intake.down()
         } else {
-            Intake.raiseArm()
+            Intake.up()
         }
     }
 }

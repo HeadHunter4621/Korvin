@@ -22,14 +22,13 @@ object Intake : SubsystemBase() {
     
     fun intakeControl(speed: Double) { intake.set(speed) }
     
-    fun raiseArm() {
+    fun up() {
         
         isUp = true
         arm.set(DoubleSolenoid.Value.kForward)
     }
     
-    fun lowerArm() {
-        
+    fun down() {
         isUp = false
         arm.set(DoubleSolenoid.Value.kReverse)
     }

@@ -7,8 +7,8 @@ import frc.robot.ElectronicIDs
 
 object Compressor : SubsystemBase() {
 
-    var onboardCompressor: Compressor = Compressor(ElectronicIDs.ONBOARD_COMPRESSOR_ID, PneumaticsModuleType.REVPH)
-    var offboardCompressor: Compressor = Compressor(ElectronicIDs.OFFBOARD_COMPRESSOR_ID, PneumaticsModuleType.REVPH)
+    val onboardCompressor: Compressor = Compressor(ElectronicIDs.ONBOARD_COMPRESSOR_ID, PneumaticsModuleType.REVPH)
+    val offboardCompressor: Compressor = Compressor(ElectronicIDs.OFFBOARD_COMPRESSOR_ID, PneumaticsModuleType.REVPH)
     
     fun startOnboardCompressor() { onboardCompressor.enableDigital() }
     

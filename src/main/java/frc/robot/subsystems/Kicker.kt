@@ -10,18 +10,22 @@ object Kicker : SubsystemBase() {
     val kicker = DoubleSolenoid(PneumaticsModuleType.REVPH, ElectronicIDs.KICKER_RAISE_ID, ElectronicIDs.KICKER_LOWER_ID)
     var isUp = false
     
-    init { lowerKicker() }
+    init { down() }
     
-    fun raiseKicker() {
-
-        isUp = true
-        kicker.set(DoubleSolenoid.Value.kForward)
+    fun up() {
+        
+        if(!isUp){
+            isUp = true
+            kicker.set(DoubleSolenoid.Value.kForward)
+        }
     }
     
-    fun lowerKicker() {
-
-        isUp = false
-        kicker.set(DoubleSolenoid.Value.kReverse)
+    fun down() {
+        
+        if(isUp){
+            isUp = false
+            kicker.set(DoubleSolenoid.Value.kReverse)
+        }
     }
     
     fun resetKickerSolenoid() { kicker.set(DoubleSolenoid.Value.kOff) }

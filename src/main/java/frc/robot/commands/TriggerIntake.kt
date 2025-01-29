@@ -13,17 +13,10 @@ class TriggerIntake : Command() {
     override fun execute() {
 
         if (first) {
-
-            if (Intake.isUp) {
-                Intake.lowerArm()
-            }
-            if (Kicker.isUp) {
-                Kicker.lowerKicker()
-            }
-
+            Intake.down()
+            Kicker.down()
             first = false
         }
-
         Intake.intake()
     }
     

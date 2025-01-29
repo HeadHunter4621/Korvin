@@ -13,17 +13,11 @@ class TriggerEject : Command() {
     override fun execute() {
 
         if (first) {
-
-            if (Intake.isUp) {
-                Intake.lowerArm()
-            }
-
+            Intake.down()
             first = false
         }
         
-        if (! Kicker.isUp) {
-            Kicker.raiseKicker()
-        }
+        Kicker.up()
         
         Intake.intakeControl(.75)
     }
@@ -33,7 +27,7 @@ class TriggerEject : Command() {
     // Called once after isFinished returns true
     override fun end(interrupted: Boolean) {
         first = true
-        Kicker.lowerKicker()
+        Kicker.down()
         Intake.stop()
     }
     
