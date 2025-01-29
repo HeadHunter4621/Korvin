@@ -6,7 +6,7 @@ import frc.robot.ConfigConstants
 import frc.robot.ElectronicIDs
 import frc.robot.Input
 
-class DriveSubsystem : SubsystemBase() {
+object Drivetrain : SubsystemBase() {
     private var slowMode = false
     
     val leftFollower = Jaguar(ElectronicIDs.DRIVE_LEFT_FOLLOWER_ID)
@@ -19,7 +19,7 @@ class DriveSubsystem : SubsystemBase() {
     
     init {}
     
-    private fun tank() {
+    fun tank() {
         if (slowMode) {
             drivetrain.tankDrive(
                 Input.getLeftJoystickY() * ConfigConstants.DRIVE_SPEED_SLOW_MULTIPLY,

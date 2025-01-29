@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import frc.robot.ElectronicIDs
 
-object CompressorSubsystem : SubsystemBase() {
+object Compressor : SubsystemBase() {
     var onboardCompressor: Compressor =
         Compressor(ElectronicIDs.ONBOARD_COMPRESSOR_ID, PneumaticsModuleType.REVPH)
     var offboardCompressor: Compressor =

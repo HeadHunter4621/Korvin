@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import frc.robot.ElectronicIDs
 
-class KickerSubsystem : SubsystemBase() {
+object Kicker : SubsystemBase() {
     
     val kicker = DoubleSolenoid(PneumaticsModuleType.REVPH, ElectronicIDs.KICKER_RAISE_ID, ElectronicIDs.KICKER_LOWER_ID)
     var isUp = false

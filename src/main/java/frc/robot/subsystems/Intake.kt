@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Jaguar
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 import frc.robot.ElectronicIDs
 
-object IntakeSubsystem : SubsystemBase() {
+object Intake : SubsystemBase() {
     
     val arm = DoubleSolenoid(PneumaticsModuleType.REVPH, ElectronicIDs.INTAKE_RAISE_ID, ElectronicIDs.INTAKE_LOWER_ID) // I'm not sure if this is the right type
     val intake = Jaguar(ElectronicIDs.INTAKE_ID)
@@ -18,7 +18,7 @@ object IntakeSubsystem : SubsystemBase() {
     
     fun eject() { intake.set(.7) }
     
-    fun stopIntake() { intake.set(0.0) }
+    fun stop() { intake.set(0.0) }
     
     fun intakeControl(speed: Double) { intake.set(speed) }
     
