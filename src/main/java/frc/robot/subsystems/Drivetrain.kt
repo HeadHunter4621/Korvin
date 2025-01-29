@@ -1,4 +1,5 @@
-package edu.wpi.first.wpilibj.templates.subsystems
+package frc.robot.subsystems
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive
 import edu.wpi.first.wpilibj.motorcontrol.Jaguar
 import edu.wpi.first.wpilibj2.command.SubsystemBase
@@ -7,6 +8,7 @@ import frc.robot.ElectronicIDs
 import frc.robot.Input
 
 object Drivetrain : SubsystemBase() {
+
     private var slowMode = false
     
     val leftFollower = Jaguar(ElectronicIDs.DRIVE_LEFT_FOLLOWER_ID)
@@ -20,6 +22,7 @@ object Drivetrain : SubsystemBase() {
     init {}
     
     fun tank() {
+
         if (slowMode) {
             drivetrain.tankDrive(
                 Input.getLeftJoystickY() * ConfigConstants.DRIVE_SPEED_SLOW_MULTIPLY,
@@ -35,7 +38,5 @@ object Drivetrain : SubsystemBase() {
         }
     }
     
-    fun slowMode() {
-        slowMode = ! slowMode
-    }
+    fun slowMode() { slowMode = ! slowMode }
 }

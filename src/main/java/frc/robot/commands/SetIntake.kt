@@ -8,9 +8,7 @@ class SetIntake : Command() {
     private var speed:Double = 0.0
     
     init { addRequirements(Intake) }
-    
-    override fun initialize() {}
-    
+
     override fun execute() { Intake.intakeControl(speed) }
     
     override fun isFinished(): Boolean { return false }

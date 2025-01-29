@@ -6,14 +6,11 @@ import frc.robot.subsystems.Kicker
 class SwitchKicker : Command() {
     
     init { addRequirements(Kicker) }
-    
-    override fun initialize() {}
-    
-    override fun execute() {}
-    
+
     override fun isFinished(): Boolean { return true }
     
     override fun end(isFinished: Boolean) {
+
         if (Kicker.isUp) {
             Kicker.lowerKicker()
         } else {

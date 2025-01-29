@@ -26,14 +26,12 @@ object Intake : SubsystemBase() {
         
         isUp = true
         arm.set(DoubleSolenoid.Value.kForward)
-        
     }
     
     fun lowerArm() {
         
         isUp = false
         arm.set(DoubleSolenoid.Value.kReverse)
-        
     }
     
     fun resetArmSolenoid() { arm.set(DoubleSolenoid.Value.kOff) }

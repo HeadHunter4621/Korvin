@@ -15,6 +15,7 @@ class Pressurize(compressorChannel: Int): Command() {
     override fun initialize() {}
     
     override fun execute() {
+
         when (compressorChannel) {
             1 -> Compressor.startOnboardCompressor()
             2 -> Compressor.startOffboardCompressor()

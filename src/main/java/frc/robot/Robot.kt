@@ -25,18 +25,10 @@ object Robot : TimedRobot() {
     private var autonomousCommand: Command? = null
 
     init {
-        // Kotlin initializer block, which effectually serves as the constructor code.
-        // https://kotlinlang.org/docs/classes.html#constructors
-        // This work can also be done in the inherited `robotInit()` method. But as of the 2025 season the 
-        // `robotInit` method's Javadoc encourages using the constructor and the official templates
-        // moved initialization code out `robotInit` and into the constructor. We follow suit in Kotlin.
-        
-        // Report the use of the Kotlin Language for "FRC Usage Report" statistics.
-        // Please retain this line so that Kotlin's growing use by teams is seen by FRC/WPI.
+
         HAL.report(tResourceType.kResourceType_Language, tInstances.kLanguage_Kotlin, 0, WPILibVersion.Version)
-        // Access the RobotContainer object so that it is initialized. This will perform all our
-        // button bindings, and put our autonomous chooser on the dashboard.
         RobotContainer
+
     }
 
 
@@ -47,8 +39,10 @@ object Robot : TimedRobot() {
     override fun disabledPeriodic() {}
 
     override fun autonomousInit() {
+
         autonomousCommand = RobotContainer.getAutonomousCommand()
         autonomousCommand?.schedule()
+
     }
 
     override fun autonomousPeriodic() {}

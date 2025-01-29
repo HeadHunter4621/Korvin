@@ -13,11 +13,13 @@ object Kicker : SubsystemBase() {
     init { lowerKicker() }
     
     fun raiseKicker() {
+
         isUp = true
         kicker.set(DoubleSolenoid.Value.kForward)
     }
     
     fun lowerKicker() {
+
         isUp = false
         kicker.set(DoubleSolenoid.Value.kReverse)
     }
