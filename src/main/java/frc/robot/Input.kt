@@ -6,8 +6,6 @@ import edu.wpi.first.wpilibj.XboxController
 
 object Input {
     private val driverController = XboxController(0)
-    private val gunnerController = Joystick(1)
-
     var rotationOffset = Rotation2d(0.0)
 
     fun getLeftJoystickX():Double{ return -driverController.leftX }

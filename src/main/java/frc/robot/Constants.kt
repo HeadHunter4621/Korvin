@@ -2,17 +2,16 @@ package frc.robot
 
 object ConfigConstants {
     
-    const val DRIVE_SPEED_NORMAL_MULTIPLY = 1
-    const val DRIVE_SPEED_SLOW_MULTIPLY = 0.3 // This is what is was in the original code
+    const val DRIVE_SPEED_MULTIPLY = 1
     
 }
 
 object ElectronicIDs {
 
-    const val DRIVE_LEFT_LEADER_ID = -1
-    const val DRIVE_LEFT_FOLLOWER_ID = -1
-    const val DRIVE_RIGHT_LEADER_ID = -1
-    const val DRIVE_RIGHT_FOLLOWER_ID = -1
+    const val DRIVE_LEFT_1_ID = -1
+    const val DRIVE_LEFT_2_ID = -1
+    const val DRIVE_RIGHT_1_ID = -1
+    const val DRIVE_RIGHT_2_ID = -1
     
     const val INTAKE_ID = -1
     

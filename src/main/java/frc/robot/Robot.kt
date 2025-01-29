@@ -49,11 +49,7 @@ object Robot : TimedRobot() {
 
     override fun teleopInit() { autonomousCommand?.cancel() }
 
-    override fun teleopPeriodic() {
-
-        DifferentialDrive.tankDriveIK(-Input.getLeftJoystickX(), -Input.getRightJoystickY(), false)
-
-    }
+    override fun teleopPeriodic() {}
 
     override fun testInit() { CommandScheduler.getInstance().cancelAll() }
 
