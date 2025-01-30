@@ -1,34 +1,26 @@
 package frc.robot.subsystems
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive
 import edu.wpi.first.wpilibj.motorcontrol.Jaguar
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.ElectronicIDs
 
-object Drivetrain : SubsystemBase() {
-    
-    private val motorLeftFront = Jaguar(ElectronicIDs.DRIVE_LEFT_1_ID)
-    private val motorLeftBack = Jaguar(ElectronicIDs.DRIVE_LEFT_2_ID)
-    
-    private val motorRightFront = Jaguar(ElectronicIDs.DRIVE_RIGHT_1_ID)
-    private val motorRightBack = Jaguar(ElectronicIDs.DRIVE_RIGHT_2_ID)
-    
-    fun setSpeeds(leftSpeed:Double, rightSpeed: Double) {
-        
-        motorLeftFront.set(leftSpeed)
-        motorLeftBack.set(leftSpeed)
-        
-        motorRightFront.set(rightSpeed)
-        motorRightBack.set(rightSpeed)
-        
+object  Drivetrain : SubsystemBase() {
+
+    private val motorLF = Jaguar(ElectronicIDs.DRIVE_LF_ID)
+    private val motorRF = Jaguar(ElectronicIDs.DRIVE_RF_ID)
+
+    private val motorLB = Jaguar(ElectronicIDs.DRIVE_LB_ID)
+    private val motorRB = Jaguar(ElectronicIDs.DRIVE_RB_ID)
+    val differentialDrive: DifferentialDrive
+
+    init{
+
+        motorLF.addFollower(motorLB)
+        motorRF.addFollower(motorRB)
+
+        differentialDrive = DifferentialDrive(motorLF, motorRF)
+
     }
-    
-    fun stop() {
-        
-        motorLeftFront.stopMotor()
-        motorLeftBack.stopMotor()
-        
-        motorRightFront.stopMotor()
-        motorRightBack.stopMotor()
-        
-    }
+
 }

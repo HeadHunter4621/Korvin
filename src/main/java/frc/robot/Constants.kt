@@ -8,10 +8,10 @@ object ConfigConstants {
 
 object ElectronicIDs {
 
-    const val DRIVE_LEFT_1_ID = -1
-    const val DRIVE_LEFT_2_ID = -1
-    const val DRIVE_RIGHT_1_ID = -1
-    const val DRIVE_RIGHT_2_ID = -1
+    const val DRIVE_LF_ID = -1
+    const val DRIVE_LB_ID = -1
+    const val DRIVE_RF_ID = -1
+    const val DRIVE_RB_ID = -1
     
     const val INTAKE_ID = -1
     

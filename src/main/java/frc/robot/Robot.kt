@@ -4,10 +4,10 @@ import edu.wpi.first.hal.FRCNetComm.tInstances
 import edu.wpi.first.hal.FRCNetComm.tResourceType
 import edu.wpi.first.hal.HAL
 import edu.wpi.first.wpilibj.TimedRobot
-import edu.wpi.first.wpilibj.drive.DifferentialDrive
 import edu.wpi.first.wpilibj.util.WPILibVersion
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.CommandScheduler
+import frc.robot.subsystems.Drivetrain
 
 
 /**
@@ -49,7 +49,18 @@ object Robot : TimedRobot() {
 
     override fun teleopInit() { autonomousCommand?.cancel() }
 
-    override fun teleopPeriodic() {}
+    override fun teleopPeriodic() {
+
+        // Tank Drive (sides driven by both joysticks)
+        // Drivetrain.differentialDrive.tankDrive(Input.getLeftJoystickX(), Input.getRightJoystickX())
+
+        // Arcade Drive
+        // Drivetrain.differentialDrive.arcadeDrive(Input.getLeftJoystickX(), Input.getLeftJoystickY())
+
+        // Curvature Drive (A button switches to rotation mode)
+        Drivetrain.differentialDrive.curvatureDrive(Input.getLeftJoystickY(), Input.getLeftJoystickX(), Input.aButton())
+
+    }
 
     override fun testInit() { CommandScheduler.getInstance().cancelAll() }
 
