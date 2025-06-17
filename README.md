@@ -1,1 +1,1 @@
-# Personal project: Reprogramming SERT's 2014 Robot (Byter)
+# Re-Coding my team's 2024 robot, Marvin, by myself! :D
