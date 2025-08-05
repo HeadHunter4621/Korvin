@@ -4,20 +4,20 @@ import edu.wpi.first.math.geometry.Translation2d
 import edu.wpi.first.math.kinematics.ChassisSpeeds
 import edu.wpi.first.wpilibj2.command.Command
 import frc.robot.EditingConstants
-import frc.robot.Kama
+import frc.robot.Input
 import kotlin.math.*
 
 
 class DrivetrainCommand(private val fieldOriented: Boolean = true): Command() {
 
-    val joystickX = Kama::sonaPiLeftJoystickX
-    val joystickY = Kama::sonaPiLeftJoystickY
-    val joystickZ = Kama::sonaPiRightJoystickX
-    val inputRotOffset = Kama.rotOffset
+    val joystickX = Input::getLeftJoystickX
+    val joystickY = Input::getLeftJoystickY
+    val joystickZ = Input::getRightJoystickX
+    val inputRotOffset = Input.rotOffset
 
     init {
 
-        addRequirements(NokaAle)
+        addRequirements(Drivetrain)
 
     }
 
@@ -50,22 +50,22 @@ class DrivetrainCommand(private val fieldOriented: Boolean = true): Command() {
 
         if ((joystickX() == 0.0) && (joystickY() == 0.0) && (joystickX() == 0.0)) {
 
-            NokaAle.stop()
+            Drivetrain.stop()
 
         } else if (fieldOriented) {
 
-            NokaAle.drive(
+            Drivetrain.drive(
                 ChassisSpeeds.fromFieldRelativeSpeeds(
                     newX * EditingConstants.DRIVE_SPEED,
                     newY * EditingConstants.DRIVE_SPEED,
                     joystickZ().pow(3) * EditingConstants.TURN_SPEED,
-                    NokaAle.getPose().rotation.minus(inputRotOffset)
+                    Drivetrain.getPose().rotation.minus(inputRotOffset)
                 )
             )
 
         } else {
 
-            NokaAle.drive(
+            Drivetrain.drive(
                 ChassisSpeeds(
                     newX * EditingConstants.DRIVE_SPEED,
                     newY * EditingConstants.DRIVE_SPEED,
@@ -77,7 +77,7 @@ class DrivetrainCommand(private val fieldOriented: Boolean = true): Command() {
 
         fun isFinished(): Boolean { return false }
 
-        fun end(interrupted: Boolean) { NokaAle.stop() }
+        fun end(interrupted: Boolean) { Drivetrain.stop() }
 
     }
 

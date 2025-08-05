@@ -4,22 +4,22 @@ import edu.wpi.first.math.geometry.Translation2d
 import edu.wpi.first.math.system.plant.DCMotor
 import kotlin.math.PI
 
-object NanpaPiIloTawa {
+object DrivetrainConstants {
 
     const val HALF_SIDE_LENGTH = 0.5773 / 2.0
 
-    val nanpaPiLukaWanAle = listOf(
+    val swerveModuleData = listOf(
         SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 7, 11, 4, -0.355-1.61-1.56+ PI /2, false), //Back Left
         SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, -HALF_SIDE_LENGTH), 8, 12, 3, -0.138-1.57-1.54+ PI /2, false), //Back Right
         SwerveModuleData(Translation2d(HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 5, 9, 1, 2.41-1.612-1.58+ PI /2, false), //Front Left
         SwerveModuleData(Translation2d(-HALF_SIDE_LENGTH, HALF_SIDE_LENGTH), 6, 10, 2, 0.059-1.568-1.575+ PI /2, false) //Front Right
     )
 
-    const val soweliTawaLiAla = false
-    const val soweliSikeLiAla = false
+    const val driveMotorInverted = false
+    const val angleMotorInverted = false
 
-    const val nanpaWawaSuliPiSoweliTawa = 0
-    const val nanpaWawaSuliPiSoweliSike = 0
+    const val driveCurrentLimit = 0
+    const val angleCurrentLimit = 0
 
     const val ANGLE_ENCODER_MULTIPLY = 1.0
     const val DRIVE_ENCODER_MULTIPLY_POSITION = 1.0

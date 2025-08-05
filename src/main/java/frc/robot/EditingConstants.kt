@@ -2,7 +2,7 @@ package frc.robot
 
 object EditingConstants {
     
-    const val WAWA_TAWA = 1
-    const val WAWA_SIKE = 1
+    const val DRIVE_SPEED = 1
+    const val TURN_SPEED = 1
     
 }
