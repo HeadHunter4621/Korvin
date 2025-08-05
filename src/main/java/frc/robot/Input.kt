@@ -1,5 +1,6 @@
 package frc.robot
 
+import edu.wpi.first.math.geometry.Rotation2d
 import edu.wpi.first.wpilibj.XboxController
 
 object Input {
@@ -15,5 +16,5 @@ object Input {
     
     fun getRightJoystickY(): Double { return controller.rightY }
 
-    fun aButton(): Boolean { return controller.aButton }
+    val rotOffset = Rotation2d()
 }
