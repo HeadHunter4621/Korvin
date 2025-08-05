@@ -16,5 +16,8 @@ object Input {
     
     fun getRightJoystickY(): Double { return controller.rightY }
 
-    val rotOffset = Rotation2d()
+    fun aButton(): Boolean { return controller.aButton }
+
+    fun getRotOffset(): Rotation2d { return Rotation2d()
+    }
 }
