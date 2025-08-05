@@ -4,20 +4,20 @@ import edu.wpi.first.math.geometry.Translation2d
 import edu.wpi.first.math.kinematics.ChassisSpeeds
 import edu.wpi.first.wpilibj2.command.Command
 import frc.robot.EditingConstants
-import frc.robot.Input
+import frc.robot.Kama
 import kotlin.math.*
 
 
-class JoystickDrive(private val fieldOriented: Boolean = true): Command() {
+class DrivetrainCommand(private val fieldOriented: Boolean = true): Command() {
 
-    val joystickX = Input::getLeftJoystickX
-    val joystickY = Input::getLeftJoystickY
-    val joystickZ = Input::getRightJoystickX
-    val inputRotOffset = Input.rotOffset
+    val joystickX = Kama::sonaPiLeftJoystickX
+    val joystickY = Kama::sonaPiLeftJoystickY
+    val joystickZ = Kama::sonaPiRightJoystickX
+    val inputRotOffset = Kama.rotOffset
 
     init {
 
-        addRequirements(Drivetrain)
+        addRequirements(NokaAle)
 
     }
 
@@ -50,22 +50,22 @@ class JoystickDrive(private val fieldOriented: Boolean = true): Command() {
 
         if ((joystickX() == 0.0) && (joystickY() == 0.0) && (joystickX() == 0.0)) {
 
-            Drivetrain.stop()
+            NokaAle.stop()
 
         } else if (fieldOriented) {
 
-            Drivetrain.drive(
+            NokaAle.drive(
                 ChassisSpeeds.fromFieldRelativeSpeeds(
                     newX * EditingConstants.DRIVE_SPEED,
                     newY * EditingConstants.DRIVE_SPEED,
                     joystickZ().pow(3) * EditingConstants.TURN_SPEED,
-                    Drivetrain.getPose().rotation.minus(inputRotOffset)
+                    NokaAle.getPose().rotation.minus(inputRotOffset)
                 )
             )
 
         } else {
 
-            Drivetrain.drive(
+            NokaAle.drive(
                 ChassisSpeeds(
                     newX * EditingConstants.DRIVE_SPEED,
                     newY * EditingConstants.DRIVE_SPEED,
@@ -77,7 +77,7 @@ class JoystickDrive(private val fieldOriented: Boolean = true): Command() {
 
         fun isFinished(): Boolean { return false }
 
-        fun end(interrupted: Boolean) { Drivetrain.stop() }
+        fun end(interrupted: Boolean) { NokaAle.stop() }
 
     }
 

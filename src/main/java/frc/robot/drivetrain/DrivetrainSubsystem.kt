@@ -19,87 +19,87 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase
 import kotlin.math.*
 
 
-class SwerveModule(
-    private val driveMotor: SparkMax,
-    private val angleMotor: SparkMax,
-    private val angleEncoder: CANcoder,
-    private val angleOffset: Double,
-    var state: SwerveModuleState,
+class NokaWan(
+    private val soweliTawa: SparkMax,
+    private val soweliSike: SparkMax,
+    private val okoPiSoweliSike: CANcoder,
+    private val antePiSoweliSike: Double,
+    var nasin: SwerveModuleState,
 ) : MotorSafety() {
 
-    var position: SwerveModulePosition
-    private var goal = state
+    var ma: SwerveModulePosition
+    private var maWile = nasin
     private var reference = 0.0
-    val inverted = false
+    val ala = false
 
     init{
 
-        val driveConfig = SparkMaxConfig()
-        val angleConfig = SparkMaxConfig()
+        val nasinNanpaPiSoweliTawa = SparkMaxConfig()
+        val nasinNanpaPiSoweliSike = SparkMaxConfig()
 
         // Drive Motors
-        driveConfig.inverted(DrivetrainConstants.DRIVE_MOTOR_INVERTED)
-        driveConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
-        driveConfig.smartCurrentLimit(DrivetrainConstants.DRIVE_CURRENT_LIMIT)
+        nasinNanpaPiSoweliTawa.inverted(NanpaPiIloTawa.soweliTawaLiAla)
+        nasinNanpaPiSoweliTawa.idleMode(SparkBaseConfig.IdleMode.kBrake)
+        nasinNanpaPiSoweliTawa.smartCurrentLimit(NanpaPiIloTawa.nanpaWawaSuliPiSoweliTawa)
 
-        driveConfig.closedLoop.p(DrivetrainConstants.DRIVE_P)
-        driveConfig.closedLoop.i(DrivetrainConstants.DRIVE_I)
-        driveConfig.closedLoop.d(DrivetrainConstants.DRIVE_D)
+        nasinNanpaPiSoweliTawa.closedLoop.p(NanpaPiIloTawa.DRIVE_P)
+        nasinNanpaPiSoweliTawa.closedLoop.i(NanpaPiIloTawa.DRIVE_I)
+        nasinNanpaPiSoweliTawa.closedLoop.d(NanpaPiIloTawa.DRIVE_D)
 
-        driveConfig.encoder.positionConversionFactor(DrivetrainConstants.DRIVE_ENCODER_MULTIPLY_POSITION)
-        driveConfig.encoder.velocityConversionFactor(DrivetrainConstants.DRIVE_ENCODER_MULTIPLY_VELOCITY)
+        nasinNanpaPiSoweliTawa.encoder.positionConversionFactor(NanpaPiIloTawa.DRIVE_ENCODER_MULTIPLY_POSITION)
+        nasinNanpaPiSoweliTawa.encoder.velocityConversionFactor(NanpaPiIloTawa.DRIVE_ENCODER_MULTIPLY_VELOCITY)
 
         // Angle Motors
-        angleConfig.inverted(DrivetrainConstants.ANGLE_MOTOR_INVERTED)
-        angleConfig.idleMode(SparkBaseConfig.IdleMode.kBrake)
-        angleConfig.smartCurrentLimit(DrivetrainConstants.ANGLE_CURRENT_LIMIT)
+        nasinNanpaPiSoweliSike.inverted(NanpaPiIloTawa.soweliSikeLiAla)
+        nasinNanpaPiSoweliSike.idleMode(SparkBaseConfig.IdleMode.kBrake)
+        nasinNanpaPiSoweliSike.smartCurrentLimit(NanpaPiIloTawa.nanpaWawaSuliPiSoweliSike)
 
-        angleConfig.closedLoop.p(DrivetrainConstants.ANGLE_P)
-        angleConfig.closedLoop.i(DrivetrainConstants.ANGLE_I)
-        angleConfig.closedLoop.d(DrivetrainConstants.ANGLE_D)
+        nasinNanpaPiSoweliSike.closedLoop.p(NanpaPiIloTawa.ANGLE_P)
+        nasinNanpaPiSoweliSike.closedLoop.i(NanpaPiIloTawa.ANGLE_I)
+        nasinNanpaPiSoweliSike.closedLoop.d(NanpaPiIloTawa.ANGLE_D)
 
-        angleConfig.closedLoop.positionWrappingEnabled(true)
-        angleConfig.closedLoop.positionWrappingMinInput(-PI)
-        angleConfig.closedLoop.positionWrappingMaxInput(PI)
+        nasinNanpaPiSoweliSike.closedLoop.positionWrappingEnabled(true)
+        nasinNanpaPiSoweliSike.closedLoop.positionWrappingMinInput(-PI)
+        nasinNanpaPiSoweliSike.closedLoop.positionWrappingMaxInput(PI)
 
         // Angle Encoders
-        angleConfig.encoder.positionConversionFactor(DrivetrainConstants.ANGLE_ENCODER_MULTIPLY)
-        angleConfig.encoder.velocityConversionFactor(DrivetrainConstants.ANGLE_ENCODER_MULTIPLY / 60)
+        nasinNanpaPiSoweliSike.encoder.positionConversionFactor(NanpaPiIloTawa.ANGLE_ENCODER_MULTIPLY)
+        nasinNanpaPiSoweliSike.encoder.velocityConversionFactor(NanpaPiIloTawa.ANGLE_ENCODER_MULTIPLY / 60)
 
-        position = SwerveModulePosition(driveMotor.encoder.position, getAngle())
+        ma = SwerveModulePosition(soweliTawa.encoder.position, lukinNanpaSike())
 
-        angleMotor.configure(angleConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
-        driveMotor.configure(driveConfig, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
+        soweliSike.configure(nasinNanpaPiSoweliSike, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
+        soweliTawa.configure(nasinNanpaPiSoweliTawa, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters)
 
     }
 
-    fun getAngle(): Rotation2d {
-        if(inverted) {
-            angleMotor.encoder.setPosition(angleEncoder.absolutePosition.valueAsDouble * DrivetrainConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)
+    fun lukinNanpaSike(): Rotation2d {
+        if(ala) {
+            soweliSike.encoder.setPosition(okoPiSoweliSike.absolutePosition.valueAsDouble * NanpaPiIloTawa.ANGLE_ENCODER_MULTIPLY - antePiSoweliSike)
         }else{
-            angleMotor.encoder.setPosition((-(angleEncoder.absolutePosition.valueAsDouble * DrivetrainConstants.ANGLE_ENCODER_MULTIPLY - angleOffset)))
+            soweliSike.encoder.setPosition((-(okoPiSoweliSike.absolutePosition.valueAsDouble * NanpaPiIloTawa.ANGLE_ENCODER_MULTIPLY - antePiSoweliSike)))
         }
 
-        return Rotation2d((angleMotor.encoder.position+ PI).mod(2*PI)-PI)
+        return Rotation2d((soweliSike.encoder.position+ PI).mod(2*PI)-PI)
     }
 
     // Run periodically
-    fun updateState() {
-        val angle = getAngle()
-        state = SwerveModuleState(driveMotor.encoder.velocity, angle)
-        position = SwerveModulePosition(driveMotor.encoder.position, angle)
+    fun anteNasin() {
+        val angle = lukinNanpaSike()
+        nasin = SwerveModuleState(soweliTawa.encoder.velocity, angle)
+        ma = SwerveModulePosition(soweliTawa.encoder.position, angle)
     }
 
-    fun set(wanted: SwerveModuleState) {
-        wanted.optimize(getAngle())
-        val driveError = wanted.speedMetersPerSecond - driveMotor.encoder.velocity
+    fun lon(wanted: SwerveModuleState) {
+        wanted.optimize(lukinNanpaSike())
+        val driveError = wanted.speedMetersPerSecond - soweliTawa.encoder.velocity
 
-        goal = SwerveModuleState(wanted.speedMetersPerSecond, Rotation2d(wanted.angle.radians))
-        reference = driveError.pow(2) * sign(driveError) + driveMotor.encoder.velocity
-        angleMotor.closedLoopController.setReference(wanted.angle.radians, SparkBase.ControlType.kPosition)
+        maWile = SwerveModuleState(wanted.speedMetersPerSecond, Rotation2d(wanted.angle.radians))
+        reference = driveError.pow(2) * sign(driveError) + soweliTawa.encoder.velocity
+        soweliSike.closedLoopController.setReference(wanted.angle.radians, SparkBase.ControlType.kPosition)
     }
 
-    fun getModuleGoal():SwerveModuleState { return SwerveModuleState(goal.speedMetersPerSecond, Rotation2d(goal.angle.radians)) }
+    fun lukinWileLuka():SwerveModuleState { return SwerveModuleState(maWile.speedMetersPerSecond, Rotation2d(maWile.angle.radians)) }
 
     fun setMotorMode(coast: Boolean, driveConfig:SparkMaxConfig, angleConfig:SparkMaxConfig) {
 
@@ -116,27 +116,27 @@ class SwerveModule(
 
     fun getModuleReference(): Double { return reference }
 
-    fun getAmps() :Pair<Double, Double> { return Pair(driveMotor.outputCurrent, angleMotor.outputCurrent) }
+    fun getAmps() :Pair<Double, Double> { return Pair(soweliTawa.outputCurrent, soweliSike.outputCurrent) }
 
     fun setCurrentLimit(amps:Int, driveConfig: SparkMaxConfig) { driveConfig.smartCurrentLimit(amps) }
 
     override fun stopMotor() {
-        driveMotor.stopMotor()
-        angleMotor.stopMotor()
+        soweliTawa.stopMotor()
+        soweliSike.stopMotor()
     }
 
-    fun getEncoderHealth(): Double { return angleEncoder.magnetHealth.valueAsDouble }
+    fun getEncoderHealth(): Double { return okoPiSoweliSike.magnetHealth.valueAsDouble }
 
     override fun getDescription(): String { return "Swerve"
     }
 }
 
-object Drivetrain: SubsystemBase() {
+object NokaAle: SubsystemBase() {
 
     private val imu = AHRS(AHRS.NavXComType.kMXP_SPI)
 
     private val kinematics: SwerveDriveKinematics
-    private var modules: Array<SwerveModule>
+    private var modules: Array<NokaWan>
     private var odometry: SwerveDriveOdometry
     private val poseEstimator: SwerveDrivePoseEstimator
 
@@ -152,9 +152,9 @@ object Drivetrain: SubsystemBase() {
     init {
 
         val modulePositions = mutableListOf<Translation2d>()
-        val moduleList = mutableListOf<SwerveModule>()
+        val moduleList = mutableListOf<NokaWan>()
 
-        for (moduleData in DrivetrainConstants.swerveModuleData) {
+        for (moduleData in NanpaPiIloTawa.nanpaPiLukaWanAle) {
             val driveMotor = SparkMax(moduleData.driveMotorID, SparkLowLevel.MotorType.kBrushless)
             val angleMotor = SparkMax(moduleData.angleMotorID, SparkLowLevel.MotorType.kBrushless)
 
@@ -169,8 +169,8 @@ object Drivetrain: SubsystemBase() {
         val positions = mutableListOf<SwerveModulePosition>()
 
         for (module in modules) {
-            module.updateState()
-            positions.add(module.position)
+            module.anteNasin()
+            positions.add(module.ma)
         }
 
         val positionsArray = positions.toTypedArray()
@@ -179,15 +179,15 @@ object Drivetrain: SubsystemBase() {
         odometry = SwerveDriveOdometry(kinematics, getYawAsRotation2d(), positionsArray, Pose2d())
         poseEstimator = SwerveDrivePoseEstimator(kinematics, getYawAsRotation2d(), positionsArray, Pose2d())
 
-        Drivetrain.defaultCommand = JoystickDrive(true)
+        NokaAle.defaultCommand = DrivetrainCommand(true)
 
     }
 
 
     // "Fix this nonsense" -Whoever made the original code
-    private fun createModule(driveMotor: SparkMax, angleMotor:SparkMax, moduleData: SwerveModuleData): SwerveModule {
+    private fun createModule(driveMotor: SparkMax, angleMotor:SparkMax, moduleData: SwerveModuleData): NokaWan {
 
-        return SwerveModule(
+        return NokaWan(
             driveMotor,
             angleMotor,
             CANcoder(moduleData.angleEncoderID),
@@ -202,8 +202,8 @@ object Drivetrain: SubsystemBase() {
         val positions = mutableListOf<SwerveModulePosition>()
 
         for (module in modules) {
-            module.updateState()
-            positions.add(module.position)
+            module.anteNasin()
+            positions.add(module.ma)
         }
 
         val positionsArray = positions.toTypedArray()
@@ -229,8 +229,8 @@ object Drivetrain: SubsystemBase() {
         val positions = mutableListOf<SwerveModulePosition>()
 
         for (module in modules) {
-            module.updateState()
-            positions.add(module.position)
+            module.anteNasin()
+            positions.add(module.ma)
         }
 
         val positionsArray = positions.toTypedArray()
@@ -251,7 +251,7 @@ object Drivetrain: SubsystemBase() {
         val wantedStates = kinematics.toSwerveModuleStates(chassisSpeeds)
 
         for (i in wantedStates.indices) {
-            modules[i].set(wantedStates[i])
+            modules[i].lon(wantedStates[i])
         }
 
         feed()
@@ -271,9 +271,9 @@ object Drivetrain: SubsystemBase() {
 
     }
 
-    fun getModuleAngle(index: Int): Double { return modules[index].getAngle().radians }
+    fun getModuleAngle(index: Int): Double { return modules[index].lukinNanpaSike().radians }
 
-    fun getModuleVelocity(index: Int): Double { return modules[index].state.speedMetersPerSecond }
+    fun getModuleVelocity(index: Int): Double { return modules[index].nasin.speedMetersPerSecond }
 
     fun getTilt(): Double { return atan(sqrt(tan(Units.degreesToRadians(imu.pitch.toDouble())).pow(2) + tan(Units.degreesToRadians(imu.roll.toDouble())).pow(2))) }
 
@@ -281,7 +281,7 @@ object Drivetrain: SubsystemBase() {
 
     fun getAccelerationSquared():Double { return (imu.worldLinearAccelY.pow(2) + imu.worldLinearAccelX.pow(2)).toDouble() }
 
-    fun getGoals(): Array<SwerveModuleState> { return arrayOf(modules[0].getModuleGoal(), modules[1].getModuleGoal(), modules[2].getModuleGoal(), modules[3].getModuleGoal()) }
+    fun getGoals(): Array<SwerveModuleState> { return arrayOf(modules[0].lukinWileLuka(), modules[1].lukinWileLuka(), modules[2].lukinWileLuka(), modules[3].lukinWileLuka()) }
 
     fun getReferences(): Array<Double> { return arrayOf(modules[0].getModuleReference(), modules[1].getModuleReference(), modules[2].getModuleReference(), modules[3].getModuleReference()) }
 
@@ -289,7 +289,7 @@ object Drivetrain: SubsystemBase() {
 
     fun getDraw(): Double{ return modules[0].getAmps().first+modules[1].getAmps().first+modules[2].getAmps().first+modules[3].getAmps().first }
 
-    fun getStates(): Array<SwerveModuleState>{ return arrayOf(modules[0].state, modules[1].state, modules[2].state, modules[3].state) }
+    fun getStates(): Array<SwerveModuleState>{ return arrayOf(modules[0].nasin, modules[1].nasin, modules[2].nasin, modules[3].nasin) }
 
     fun getHealth(module: Int): Double { return modules[module].getEncoderHealth() }
 
@@ -297,7 +297,7 @@ object Drivetrain: SubsystemBase() {
 
     fun getYawAsRotation2d(): Rotation2d { return Rotation2d.fromDegrees(-imu.angle) }
 
-    fun getRelativeSpeeds(): ChassisSpeeds { return kinematics.toChassisSpeeds(*arrayOf(modules[0].state, modules[1].state, modules[2].state, modules[3].state)) } // Yes it says that the asterisk is wrong, but it is correct.
+    fun getRelativeSpeeds(): ChassisSpeeds { return kinematics.toChassisSpeeds(*arrayOf(modules[0].nasin, modules[1].nasin, modules[2].nasin, modules[3].nasin)) } // Yes it says that the asterisk is wrong, but it is correct.
 
     fun getAbsoluteSpeeds(): ChassisSpeeds { return ChassisSpeeds.fromRobotRelativeSpeeds(getRelativeSpeeds(), getPose().rotation) }
 
